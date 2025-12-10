@@ -1,7 +1,24 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+
+    public void onEndlessButtonPressed()
+    {
+        SceneManager.LoadScene("EndlessMode");
+    }
+
+    public void onStoryButtonPressed()
+    {
+        SceneManager.LoadScene("StoryMode");
+    }
+
+    public void onSettingsButtonPressed()
+    {
+        SceneManager.LoadScene("Settings");
+    }
+
     public void QuitGame()
     {
 
