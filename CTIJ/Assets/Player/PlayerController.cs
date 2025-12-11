@@ -4,11 +4,16 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float delayBeforeRun = 2f;
     [SerializeField] private float jumpForce = 9f;
+    [SerializeField] private float maxSlideTime = 3f;
 
     Rigidbody2D rb;
     Animator anim;
+    Vector2 pos;
+
     bool canRun = false;
     bool isGrounded = false;
+    bool isSliding = false;
+    float slideTimer = 0f;
 
     void Awake()
     {
@@ -29,11 +34,42 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        // Running flag for Idle/Run
-        anim.SetBool("isRunning", canRun);
+        // Keep player x position constant 
+        pos = rb.position;
+        pos.x = -5.0f;
+        rb.position = pos;
 
-        // Jump input – only once when grounded
-        if (canRun && isGrounded && Input.GetKeyDown(KeyCode.Space))
+        // 1. Ground info from animator (optional, we also track isGrounded bool)
+        bool grounded = isGrounded;
+
+        // 2. Slide input
+        // Start slide
+        if (!isSliding && Input.GetKey(KeyCode.LeftControl))
+        {
+            isSliding = true;
+            slideTimer = 0f;
+            anim.SetBool("isSliding", true);
+        }
+
+        // While sliding
+        if (isSliding)
+        {
+            slideTimer += Time.deltaTime;
+
+            // End slide after max time or if key released
+            if (!Input.GetKey(KeyCode.LeftControl) || slideTimer >= maxSlideTime)
+            {
+                isSliding = false;
+                anim.SetBool("isSliding", false);
+            }
+        }
+
+        // 3. Running flag for Idle/Run (do not run while sliding)
+        bool shouldRun = canRun && grounded && !isSliding;
+        anim.SetBool("isRunning", shouldRun);
+
+        // 4. Jump input – only once when grounded and not sliding
+        if (shouldRun && Input.GetKeyDown(KeyCode.Space))
         {
             isGrounded = false;
             anim.SetBool("isGrounded", false);
@@ -45,6 +81,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    // Detect ground collision
     void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Ground"))

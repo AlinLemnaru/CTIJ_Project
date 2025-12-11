@@ -498,6 +498,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   delayBeforeRun: 2
   jumpForce: 9
+  maxSlideTime: 2
 --- !u!61 &1422782813
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -532,17 +533,17 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0.036}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.3, y: 0.67}
+    oldSize: {x: 0.7, y: 0.7}
     newSize: {x: 0.3, y: 0.67}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 0.42, y: 0.75}
+  m_Size: {x: 0.3, y: 0.68}
   m_EdgeRadius: 0
 --- !u!1 &1931129693
 GameObject:
