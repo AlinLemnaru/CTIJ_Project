@@ -2,9 +2,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private float delayBeforeRun = 2f;
-    [SerializeField] private float jumpForce = 9f;
-    [SerializeField] private float maxSlideTime = 3f;
+    [SerializeField] private float delayBeforeRun;
+    [SerializeField] private float jumpForce;
+    [SerializeField] private float maxSlideTime;
 
     Rigidbody2D rb;
     Animator anim;
