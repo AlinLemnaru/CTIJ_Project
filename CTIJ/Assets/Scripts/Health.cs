@@ -1,24 +1,33 @@
+using System.Collections;
 using UnityEngine;
 
 public class Health : MonoBehaviour
 {
+    [Header ("Health")]
     [SerializeField] private float startingHealth;
-    [SerializeField] private float hitCooldown = 0.3f;
+    private float lastHitTime = -999f;
     public float currentHealth { get; private set; }
     private Animator anim;
     private bool dead;
-    private float lastHitTime = -999f;
+   
 
+    [Header ("iFrames")]
+    [SerializeField] private float invulnerabilityDuration;
+    [SerializeField] private int numberOfFlashes;
+    private SpriteRenderer spriteRend;
 
     private void Awake()
     {
         currentHealth = startingHealth;
         anim = GetComponent<Animator>();
+        spriteRend = GetComponent<SpriteRenderer>();
     }
 
     public void TakeDamage(float damageAmount)
     {
-        if (Time.time < lastHitTime + hitCooldown || dead)
+        StartCoroutine(Invulnerability());
+
+        if (Time.time < lastHitTime + invulnerabilityDuration || dead)
             return;
 
         lastHitTime = Time.time;
@@ -27,6 +36,7 @@ public class Health : MonoBehaviour
         if (currentHealth > 0)
         {
             anim.SetTrigger("hurt");
+            
         }
         else
         {
@@ -43,6 +53,22 @@ public class Health : MonoBehaviour
 
 
         }
+    }
+
+    private IEnumerator Invulnerability()
+    {
+        Physics2D.IgnoreLayerCollision(11, 12, true);
+        for(int i = 0; i < numberOfFlashes; i++)
+        {
+            spriteRend.color = new Color(1, 0, 0, 0.9f);
+            yield return new WaitForSeconds(invulnerabilityDuration / (numberOfFlashes * 2));
+            spriteRend.color = Color.white;
+            yield return new WaitForSeconds(invulnerabilityDuration / (numberOfFlashes * 2));
+        }   
+
+        Physics2D.IgnoreLayerCollision(11, 12, false);
+
+
     }
 
    

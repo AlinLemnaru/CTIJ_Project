@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Saw_Object : MonoBehaviour
+public class Obstacle_Collider : MonoBehaviour
 {
     [SerializeField] private float damage;
 

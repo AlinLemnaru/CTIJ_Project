@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class ObstacleSpawner : MonoBehaviour
 {
-    [SerializeField] private GameObject sawPrefab;
+    [SerializeField] private GameObject[] obstaclePrefabs;
     [SerializeField] private float spawnIntervalMin = 1.5f;
     [SerializeField] private float spawnIntervalMax = 3.0f;
-    [SerializeField] private float spawnY;
+    [SerializeField] private float[] spawnY;
     [SerializeField] private float spawnXOffset;
     [SerializeField] private float moveSpeed = 6f;
 
@@ -23,22 +23,22 @@ public class ObstacleSpawner : MonoBehaviour
         {
             float wait = Random.Range(spawnIntervalMin, spawnIntervalMax);
             yield return new WaitForSeconds(wait);
-
-            SpawnSaw();
+            int index = Random.Range(0, obstaclePrefabs.Length);
+            SpawnObstacle(index);
         }
     }
 
-    void SpawnSaw()
+    void SpawnObstacle(int index)
     {
         if (player == null) return;
 
         Vector3 spawnPos = new Vector3(
             player.position.x + spawnXOffset,
-            spawnY,
+            spawnY[index],
             0f
         );
 
-        GameObject saw = Instantiate(sawPrefab, spawnPos, Quaternion.identity);
+        GameObject saw = Instantiate(obstaclePrefabs[index], spawnPos, Quaternion.identity);
 
         // attach mover
         ObstacleMover mover = saw.AddComponent<ObstacleMover>();
