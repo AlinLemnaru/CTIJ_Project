@@ -72,7 +72,7 @@ public class LoopParallax : MonoBehaviour
 
             // move this tile to the right of the rightmost one
             tile.position = new Vector3(
-                rightmost.position.x + tileWidth,
+                rightmost.position.x + tileWidth -0.01f,
                 tile.position.y,
                 tile.position.z
             );
