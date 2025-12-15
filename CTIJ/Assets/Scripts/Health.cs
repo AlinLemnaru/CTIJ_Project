@@ -9,12 +9,17 @@ public class Health : MonoBehaviour
     public float currentHealth { get; private set; }
     private Animator anim;
     private bool dead;
-   
 
     [Header ("iFrames")]
     [SerializeField] private float invulnerabilityDuration;
     [SerializeField] private int numberOfFlashes;
     private SpriteRenderer spriteRend;
+
+    [Header ("Sound Effects")]
+    [SerializeField] private float hurtSoundVolume;
+    [SerializeField] private float dyingSoundVolume;
+    [SerializeField] private AudioClip hurtSound;
+    [SerializeField] private AudioClip dyingSound;
 
     private void Awake()
     {
@@ -36,7 +41,7 @@ public class Health : MonoBehaviour
         if (currentHealth > 0)
         {
             anim.SetTrigger("hurt");
-            
+            SoundManager.instance.PlayOneShot(hurtSound, hurtSoundVolume);
         }
         else
         {
@@ -48,9 +53,12 @@ public class Health : MonoBehaviour
                 var bc = GetComponent<BoxCollider2D>();
                 bc.size = new Vector2(bc.size.y, 0.12f);
                 dead = true;
-            
-            }
+                SoundManager.instance.PlayOneShot(dyingSound, dyingSoundVolume);
 
+                // Make sure all other sounds stop
+                SoundManager.instance.StopRunLoop();
+                SoundManager.instance.StopSlideLoop();
+            }
 
         }
     }
@@ -67,9 +75,5 @@ public class Health : MonoBehaviour
         }   
 
         Physics2D.IgnoreLayerCollision(11, 12, false);
-
-
     }
-
-   
 }

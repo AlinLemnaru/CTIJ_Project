@@ -2,14 +2,25 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [Header("Player Settings")]
     [SerializeField] private float delayBeforeRun;
     [SerializeField] private float jumpForce;
     [SerializeField] private float maxSlideTime;
 
+    [Header("Sound Effects")]
+    [SerializeField] private float runningSoundVolume;
+    [SerializeField] private float slidingSoundVolume;
+    [SerializeField] private float jumpingVolume;
+    [SerializeField] private AudioClip runningSound;
+    [SerializeField] private AudioClip slidingSound;
+    [SerializeField] private AudioClip jumpingSound;
+
+    [Header("Components")]
     Rigidbody2D rb;
     Animator anim;
     Vector2 pos;
 
+    [Header("State")]
     bool canRun = false;
     bool isGrounded = false;
     bool isSliding = false;
@@ -49,6 +60,7 @@ public class PlayerController : MonoBehaviour
             isSliding = true;
             slideTimer = 0f;
             anim.SetBool("isSliding", true);
+            SoundManager.instance.PlaySlideLoop(slidingSound, slidingSoundVolume);
         }
 
         // While sliding
@@ -61,12 +73,14 @@ public class PlayerController : MonoBehaviour
             {
                 isSliding = false;
                 anim.SetBool("isSliding", false);
+                SoundManager.instance.StopSlideLoop();
             }
         }
 
         // 3. Running flag for Idle/Run (do not run while sliding)
         bool shouldRun = canRun && grounded && !isSliding;
         anim.SetBool("isRunning", shouldRun);
+        SoundManager.instance.PlayRunLoop(runningSound, runningSoundVolume * (shouldRun ? 1f : 0f));
 
         // 4. Jump input – only once when grounded and not sliding
         if (shouldRun && Input.GetKeyDown(KeyCode.Space))
@@ -78,6 +92,7 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
 
             anim.SetTrigger("jump");
+            SoundManager.instance.PlayOneShot(jumpingSound, jumpingVolume);
         }
     }
 
