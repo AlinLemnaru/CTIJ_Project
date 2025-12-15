@@ -34,7 +34,30 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        PrewarmAudio();
         Invoke(nameof(StartRunning), delayBeforeRun);
+    }
+
+    void PrewarmAudio()
+    {
+        // Use a tiny volume so it is inaudible but forces load/decompress. 
+        float warmupVolume = 0.0001f;
+
+        if (SoundManager.instance == null)
+            return; // avoid errors if manager missing
+
+        if (runningSound != null)
+            SoundManager.instance.PlayRunLoop(runningSound, warmupVolume);
+
+        if (slidingSound != null)
+            SoundManager.instance.PlaySlideLoop(slidingSound, warmupVolume);
+
+        if (jumpingSound != null)
+            SoundManager.instance.PlayOneShot(jumpingSound, warmupVolume);
+
+        // Immediately stop loops so game starts silent.
+        SoundManager.instance.StopRunLoop();
+        SoundManager.instance.StopSlideLoop();
     }
 
     void StartRunning()

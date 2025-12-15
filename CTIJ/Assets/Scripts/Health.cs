@@ -28,6 +28,26 @@ public class Health : MonoBehaviour
         spriteRend = GetComponent<SpriteRenderer>();
     }
 
+    private void Start()
+    {
+        PrewarmAudio();
+    }
+
+    void PrewarmAudio()
+    {
+        if (SoundManager.instance == null)
+            return; // avoid errors if manager missing
+
+        // Use a tiny volume so it is inaudible but forces load/decompress. 
+        float warmupVolume = 0.0001f;
+
+        if (hurtSound != null)
+            SoundManager.instance.PlayOneShot(hurtSound, warmupVolume);
+
+        if (dyingSound != null)
+            SoundManager.instance.PlayOneShot(dyingSound, warmupVolume);
+    }
+
     public void TakeDamage(float damageAmount)
     {
         StartCoroutine(Invulnerability());
