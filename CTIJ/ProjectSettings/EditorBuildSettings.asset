@@ -9,16 +9,13 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: e36bf48eae52d0142939a81c8e7a9909
   - enabled: 1
-    path: Assets/Scenes/EndlessMode.unity
-    guid: e5c8cdb2c9783674ea4c94d6f055b58a
-  - enabled: 1
     path: Assets/Scenes/StoryMode.unity
     guid: c8c4d5a5f119f4742b47aed35419a65e
   - enabled: 1
     path: Assets/Scenes/Settings.unity
     guid: 4bb24c3e6189148419026d22c2721a04
-  - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+  - enabled: 1
+    path: Assets/Scenes/EndlessMode.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
