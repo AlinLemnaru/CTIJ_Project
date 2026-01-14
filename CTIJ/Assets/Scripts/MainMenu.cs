@@ -9,11 +9,6 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("EndlessMode");
     }
 
-    public void onStoryButtonPressed()
-    {
-        SceneManager.LoadScene("StoryMode");
-    }
-
     public void onSettingsButtonPressed()
     {
         SceneManager.LoadScene("Settings");
