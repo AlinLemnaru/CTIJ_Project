@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class GameManager : MonoBehaviour
 {
@@ -7,6 +8,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Death Menu")]
     [SerializeField] private GameObject deathMenuCanvas;
+    [SerializeField] private float deathMenuDelay;
 
     [Header("Gameplay References")]
     [SerializeField] private ObstacleSpawner obstacleSpawner;
@@ -62,11 +64,27 @@ public class GameManager : MonoBehaviour
             SoundManager.instance.StopSlideLoop();
         }
 
+        // 5. Start coroutine to wait for death anim, then freeze + menu
+        StartCoroutine(HandleDeathAfterAnimation());
+
         // 5. Show death menu UI
+        // if (deathMenuCanvas != null)
+        //   deathMenuCanvas.SetActive(true);
+
+        // 6. Pause time for everything that uses Time.deltaTime
+        // Time.timeScale = 0f;
+    }
+
+    private IEnumerator HandleDeathAfterAnimation()
+    {
+        // Wait so the death animation can fully play
+        yield return new WaitForSeconds(deathMenuDelay);
+
+        // Show death menu UI
         if (deathMenuCanvas != null)
             deathMenuCanvas.SetActive(true);
 
-        // 6. Pause time for everything that uses Time.deltaTime
+        // Freeze game
         Time.timeScale = 0f;
     }
 
