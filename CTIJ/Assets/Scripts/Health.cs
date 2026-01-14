@@ -78,6 +78,12 @@ public class Health : MonoBehaviour
                 // Make sure all other sounds stop
                 SoundManager.instance.StopRunLoop();
                 SoundManager.instance.StopSlideLoop();
+
+                // Notify GameManager to show death menu and freeze game
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.OnPlayerDeath();
+                }
             }
 
         }
