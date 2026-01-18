@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections;
 
@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private LoopParallax[] parallaxLayers;
     [SerializeField] private PlayerController playerController;
 
+    [Header("Pause Menu")]
+    [SerializeField] private GameObject pauseMenuCanvas;
+
     private bool gameOver;
 
     void Awake()
@@ -26,6 +29,18 @@ public class GameManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            // Toggle pause menu
+            if (pauseMenuCanvas.activeInHierarchy)
+                PauseGame(false);
+            else
+                PauseGame(true);
         }
     }
 
@@ -98,5 +113,36 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void PauseGame(bool status)
+    {
+        // If pausing, set time scale to 0 else set to 1
+        if (status)
+        {
+            if (deathMenuCanvas.activeInHierarchy) return;  // Do not pause if death menu is active
+
+            Time.timeScale = 0f;
+
+            if (playerController != null)
+                playerController.enabled = false;
+
+            if (SoundManager.instance != null)
+            {
+                SoundManager.instance.StopRunLoop();
+                SoundManager.instance.StopSlideLoop();
+            }
+        }
+        else
+        {
+            Time.timeScale = 1f;
+
+            if (playerController != null)
+                playerController.enabled = true;
+        }
+
+        // If status is true, pause the game
+        // If status is false, unpause the game
+        pauseMenuCanvas.SetActive(status);
     }
 }
