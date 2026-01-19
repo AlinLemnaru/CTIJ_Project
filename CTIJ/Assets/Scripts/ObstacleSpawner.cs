@@ -1,10 +1,9 @@
 using UnityEngine;
+using System.Collections;
 
 public class ObstacleSpawner : MonoBehaviour
 {
     [SerializeField] private GameObject[] obstaclePrefabs;
-    [SerializeField] private float spawnIntervalMin = 1.5f;
-    [SerializeField] private float spawnIntervalMax = 3.0f;
     [SerializeField] private float[] spawnY;
     [SerializeField] private float spawnXOffset;
     [SerializeField] private float moveSpeed = 6f;
@@ -17,12 +16,11 @@ public class ObstacleSpawner : MonoBehaviour
         StartCoroutine(SpawnLoop());
     }
 
-    System.Collections.IEnumerator SpawnLoop()
+    IEnumerator SpawnLoop()
     {
         while (true)
         {
-            float wait = Random.Range(spawnIntervalMin, spawnIntervalMax);
-            yield return new WaitForSeconds(wait);
+            float wait = GameProgressManager.Instance.GetSpawnInterval();     yield return new WaitForSeconds(wait);
             int index = Random.Range(0, obstaclePrefabs.Length);
             SpawnObstacle(index);
         }
@@ -38,10 +36,10 @@ public class ObstacleSpawner : MonoBehaviour
             0f
         );
 
-        GameObject saw = Instantiate(obstaclePrefabs[index], spawnPos, Quaternion.identity);
+        GameObject obstacle = Instantiate(obstaclePrefabs[index], spawnPos, Quaternion.identity);
 
         // attach mover
-        ObstacleMover mover = saw.AddComponent<ObstacleMover>();
-        mover.speed = moveSpeed;
+        ObstacleMover mover = obstacle.AddComponent<ObstacleMover>();
+        mover.speed = GameProgressManager.Instance.GetCurrentSpeed();
     }
 }

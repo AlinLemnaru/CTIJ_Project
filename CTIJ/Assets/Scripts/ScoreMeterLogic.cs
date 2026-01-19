@@ -7,6 +7,7 @@ public class ScoreMeterLogic : MonoBehaviour
     [SerializeField] private float delayBeforeRun;
     [SerializeField] private float intervalSeconds = 0.5f; // how often distance increases
     [SerializeField] private int metersPerTick = 1;
+    
 
     private Text distanceText;
 
@@ -25,6 +26,10 @@ public class ScoreMeterLogic : MonoBehaviour
         {
             yield return new WaitForSeconds(intervalSeconds);
             distance += metersPerTick;
+
+            if (GameProgressManager.Instance != null)
+                GameProgressManager.Instance.AddDistance(metersPerTick);
+
             UpdateText();
         }
     }

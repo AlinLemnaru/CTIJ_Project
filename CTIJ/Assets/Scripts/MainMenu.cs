@@ -9,11 +9,6 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene("EndlessMode");
     }
 
-    public void onSettingsButtonPressed()
-    {
-        SceneManager.LoadScene("Settings");
-    }
-
     public void QuitGame()
     {
 

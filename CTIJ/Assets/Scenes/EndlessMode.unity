@@ -761,6 +761,56 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &161385315
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 161385317}
+  - component: {fileID: 161385316}
+  m_Layer: 0
+  m_Name: GameProgressManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &161385316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161385315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a43170ad39f430c47a347575991c33ba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameProgressManager
+  baseSpeed: 6
+  speedPerMeter: 0.02
+  baseSpawnInterval: 2.5
+  spawnIntervalPerMeter: -0.01
+  minSpawnInterval: 0.8
+  maxSpeed: 8
+--- !u!4 &161385317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 161385315}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 865.8139, y: 515.33484, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &199310396
 GameObject:
   m_ObjectHideFlags: 0
@@ -886,8 +936,6 @@ MonoBehaviour:
   - {fileID: 5852158211655623575, guid: 1a17066b67dd6c54d991d3ee6bc7dd8e, type: 3}
   - {fileID: 6137116389963669283, guid: 9f4f2a750bac10c4f983f837a029f91c, type: 3}
   - {fileID: 7515211932866251091, guid: 4727f12dde24d2f4e8b0961fe478f2b4, type: 3}
-  spawnIntervalMin: 1.5
-  spawnIntervalMax: 3
   spawnY:
   - -4.24
   - -2.8
@@ -1408,6 +1456,24 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &400128324 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5852158211655623575, guid: 1a17066b67dd6c54d991d3ee6bc7dd8e, type: 3}
+  m_PrefabInstance: {fileID: 1637188022474642545}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &400128331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 400128324}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3c9b98ad9268945a1d2fa4aad2a56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObstacleMover
+  speed: 6
 --- !u!1 &460907800
 GameObject:
   m_ObjectHideFlags: 0
@@ -5040,6 +5106,24 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &1474848763 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7515211932866251091, guid: 4727f12dde24d2f4e8b0961fe478f2b4, type: 3}
+  m_PrefabInstance: {fileID: 8425716075278778449}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1474848769
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1474848763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3c9b98ad9268945a1d2fa4aad2a56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObstacleMover
+  speed: 6
 --- !u!1 &1511816591
 GameObject:
   m_ObjectHideFlags: 0
@@ -7284,6 +7368,24 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_SpriteSortPoint: 0
+--- !u!1 &2125301674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6137116389963669283, guid: 9f4f2a750bac10c4f983f837a029f91c, type: 3}
+  m_PrefabInstance: {fileID: 9106266348641404103}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2125301681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2125301674}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d3c9b98ad9268945a1d2fa4aad2a56b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ObstacleMover
+  speed: 6
 --- !u!1 &2129498158
 GameObject:
   m_ObjectHideFlags: 0
@@ -7620,7 +7722,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5852158211655623575, guid: 1a17066b67dd6c54d991d3ee6bc7dd8e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 400128331}
   m_SourcePrefab: {fileID: 100100000, guid: 1a17066b67dd6c54d991d3ee6bc7dd8e, type: 3}
 --- !u!1001 &8425716075278778449
 PrefabInstance:
@@ -7681,7 +7786,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7515211932866251091, guid: 4727f12dde24d2f4e8b0961fe478f2b4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1474848769}
   m_SourcePrefab: {fileID: 100100000, guid: 4727f12dde24d2f4e8b0961fe478f2b4, type: 3}
 --- !u!1001 &9106266348641404103
 PrefabInstance:
@@ -7746,7 +7854,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6137116389963669283, guid: 9f4f2a750bac10c4f983f837a029f91c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2125301681}
   m_SourcePrefab: {fileID: 100100000, guid: 9f4f2a750bac10c4f983f837a029f91c, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
@@ -7777,3 +7888,4 @@ SceneRoots:
   - {fileID: 553934625}
   - {fileID: 1667437880}
   - {fileID: 555887947}
+  - {fileID: 161385317}
