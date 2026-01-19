@@ -40,11 +40,11 @@ public class PlayerController : MonoBehaviour
 
     void PrewarmAudio()
     {
-        // Use a tiny volume so it is inaudible but forces load/decompress. 
+        // Use a tiny volume - inaudible 
         float warmupVolume = 0.0001f;
 
         if (SoundManager.instance == null)
-            return; // avoid errors if manager missing
+            return; 
 
         if (runningSound != null)
             SoundManager.instance.PlayRunLoop(runningSound, warmupVolume);
@@ -55,7 +55,7 @@ public class PlayerController : MonoBehaviour
         if (jumpingSound != null)
             SoundManager.instance.PlayOneShot(jumpingSound, warmupVolume);
 
-        // Immediately stop loops so game starts silent.
+        
         SoundManager.instance.StopRunLoop();
         SoundManager.instance.StopSlideLoop();
     }
@@ -73,11 +73,10 @@ public class PlayerController : MonoBehaviour
         pos.x = -5.0f;
         rb.position = pos;
 
-        // 1. Ground info from animator (optional, we also track isGrounded bool)
+        // Ground info from animator (optional, we also track isGrounded bool)
         bool grounded = isGrounded;
 
-        // 2. Slide input
-        // Start slide
+        // Slide input
         if (!isSliding && Input.GetKey(KeyCode.LeftControl))
         {
             isSliding = true;
@@ -100,12 +99,12 @@ public class PlayerController : MonoBehaviour
             }
         }
 
-        // 3. Running flag for Idle/Run (do not run while sliding)
+        // Running flag for Idle/Run (do not run while sliding)
         bool shouldRun = canRun && grounded && !isSliding;
         anim.SetBool("isRunning", shouldRun);
         SoundManager.instance.PlayRunLoop(runningSound, runningSoundVolume * (shouldRun ? 1f : 0f));
 
-        // 4. Jump input – only once when grounded and not sliding
+        // Jump input - only once when grounded and not sliding
         if (shouldRun && Input.GetKeyDown(KeyCode.Space))
         {
             isGrounded = false;

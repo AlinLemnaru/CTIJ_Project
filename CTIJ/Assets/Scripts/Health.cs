@@ -30,15 +30,15 @@ public class Health : MonoBehaviour
 
     private void Start()
     {
-        PrewarmAudio();
+        PrewarmAudio(); //play muusic at low volume to prewarm
     }
 
     void PrewarmAudio()
     {
         if (SoundManager.instance == null)
-            return; // avoid errors if manager missing
+            return;
 
-        // Use a tiny volume so it is inaudible but forces load/decompress. 
+        // Use a tiny volume - inaudible
         float warmupVolume = 0.0001f;
 
         if (hurtSound != null)

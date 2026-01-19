@@ -82,12 +82,7 @@ public class GameManager : MonoBehaviour
         // 5. Start coroutine to wait for death anim, then freeze + menu
         StartCoroutine(HandleDeathAfterAnimation());
 
-        // 5. Show death menu UI
-        // if (deathMenuCanvas != null)
-        //   deathMenuCanvas.SetActive(true);
-
-        // 6. Pause time for everything that uses Time.deltaTime
-        // Time.timeScale = 0f;
+       
     }
 
     private IEnumerator HandleDeathAfterAnimation()

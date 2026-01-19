@@ -27,10 +27,10 @@ public class GameProgressManager : MonoBehaviour
     public float GetCurrentSpeed()
     {
         if(Distance >=550)
-            return currentSpeed; // cap speed increase after 600 meters
+            return currentSpeed; // cap speed increase after 550 meters
         if (Distance % 1 == 0 && Distance != 0)
         {
-            currentSpeed += speedPerMeter; // small boost every 50 meters
+            currentSpeed += speedPerMeter; // increase speed every meter
             if (currentSpeed > maxSpeed) 
                 currentSpeed = maxSpeed;
         }
@@ -40,10 +40,10 @@ public class GameProgressManager : MonoBehaviour
     public float GetSpawnInterval()
     {
         if (Distance >= 550)
-            return currentSpawnInterval; // cap spawn rate increase after 600 meters
+            return currentSpawnInterval; // cap spawn rate increase after 550 meters
         if (Distance % 1 == 0 && Distance != 0)
         {
-            currentSpawnInterval += spawnIntervalPerMeter; // decrease interval every 30 meters
+            currentSpawnInterval += spawnIntervalPerMeter; // decrease spawn interval every meter
             if (currentSpawnInterval < minSpawnInterval)
                 currentSpawnInterval = minSpawnInterval;
 
